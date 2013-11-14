@@ -1,0 +1,21 @@
+{
+  "concurrency": 2,
+  "browsers": [
+    {
+      "browserstack.key": "ACCESS_KEY",
+      "browserstack.user": "USERNAME",
+      "version": "10.0",
+      "browserName": "internet explorer"
+    },
+    {
+      "browserstack.key": "ACCESS_KEY",
+      "browserstack.user": "USERNAME",
+      "version": "22.0",
+      "browserName": "chrome"
+    }
+  ],
+  "remoteCfg": {
+    "port": 80,
+    "host": "hub.browserstack.com"
+  }
+}
