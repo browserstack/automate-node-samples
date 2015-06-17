@@ -1,0 +1,18 @@
+{
+  "driver": {
+    "builders": {
+      "withCapabilities": [{
+        "browserName": "firefox"
+      }]
+    }
+  },
+  "plugins": {
+    "view": {
+      "module": "nemo-view",
+      "arguments": ["path:locator"]
+    }
+  },
+  "data": {
+    "baseUrl": "https://www.paypal.com"
+  }
+}

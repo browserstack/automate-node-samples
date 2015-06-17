@@ -1,0 +1,13 @@
+{
+  "driver": {
+    "builders": {
+      "usingServer": ["http://hub.browserstack.com/wd/hub"],
+      "withCapabilities": [{
+        "browserName":       "env:BSTK_BROWSER",
+        "browserstack.user": "env:BSTK_USER",
+        "browserstack.key":  "env:BSTK_KEY",
+        "version":           "env:BSTK_VERSION"
+      }]
+    }
+  }
+}
