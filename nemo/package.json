@@ -1,0 +1,19 @@
+{
+  "name": "nemo-browserstack-example",
+  "version": "1.0.0",
+  "description": "Nemo and Browserstack integration example",
+  "main": "nemo.js",
+  "scripts": {
+    "test": "node nemo.js"
+  },
+  "keywords": [
+    "Nemo",
+    "selenium-webdriver",
+    "browserstack"
+  ],
+  "author": "Matt Edelman <mattedelman@gmail.com>",
+  "dependencies": {
+    "nemo": "^1.0.6",
+    "nemo-view": "^1.2.0"
+  }
+}
