@@ -9,6 +9,10 @@ Do remember to switch the USERNAME and ACCESS_KEY with your own browserstack cre
 
 ---
 
-The Code Samples for intern framework can be found [here](https://github.com/browserstack/intern-browserstack)
+For other nodejs frameworks, refer to their individual repositories - 
 
-The Code Samples for protractor framework can be found [here](https://github.com/browserstack/protractor-browserstack)
+- [Internjs](https://github.com/browserstack/intern-browserstack)
+- [Protractor](https://github.com/browserstack/protractor-browserstack)
+- [Nightwatch](https://github.com/browserstack/nightwatch-browserstack)
+- [WD](https://github.com/browserstack/wd-browserstack)
+- [Nemo](https://github.com/browserstack/nemo-browserstack)
