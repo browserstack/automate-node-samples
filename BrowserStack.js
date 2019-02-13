@@ -1,22 +1,30 @@
-var webdriver = require('browserstack-webdriver');
+const { Builder, By, Key, until } = require('selenium-webdriver');
+const http = require('http');
 
-var capabilities = {
-	'browserName' : 'firefox', 
-	'browserstack.user' : 'USERNAME',
-	'browserstack.key' : 'ACCESS_KEY'
-}
-var driver = new webdriver.Builder().
-	usingServer('http://hub.browserstack.com/wd/hub').
-	withCapabilities(capabilities).
-	build();
+const BROWSERSTACK_USERNAME = process.env.BROWSERSTACK_USERNAME || 'BROWSERSTACK_USERNAME';
+const BROWSERSTACK_ACCESS_KEY = process.env.BROWSERSTACK_ACCESS_KEY || 'BROWSERSTACK_ACCESS_KEY';
 
-driver.get('http://www.google.com');
-driver.findElement(webdriver.By.name('q')).sendKeys('BrowserStack');
-driver.findElement(webdriver.By.name('btnG')).click();
-driver.wait(function() {
-	return driver.getTitle().then(function(title) {
-		return title === 'BrowserStack - Google Search';
-	});
-}, 1000);
+let HttpAgent = new http.Agent({
+	keepAlive: true,
+});
 
-driver.quit();
+let capabilities = {
+	browserName: 'Firefox',
+	name: 'Firefox Test',
+	os: 'Windows'
+};
+
+(async () => {
+	let driver = new Builder()
+		.usingHttpAgent(HttpAgent)
+		.withCapabilities(capabilities)
+		.usingServer(`http://${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}@hub-cloud.browserstack.com/wd/hub`)
+		.build();
+	try {
+		await driver.get('http://www.google.com/ncr');
+		await driver.findElement(By.name('q')).sendKeys('Browserstack', Key.RETURN);
+		console.log(await driver.getTitle());
+	} finally {
+		await driver.quit();
+	}
+})();

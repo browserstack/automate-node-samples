@@ -1,0 +1,27 @@
+{
+  "name": "automate-node-samples",
+  "version": "1.0.0",
+  "description": "Automate Node Samples ---------------------",
+  "main": "BrowserStack.js",
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {
+    "mocha": "^5.2.0",
+    "selenium-webdriver": "^4.0.0-alpha.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha mocha/BrowserStackRemoteUnit.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/browserstack/automate-node-samples.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/browserstack/automate-node-samples/issues"
+  },
+  "homepage": "https://github.com/browserstack/automate-node-samples#readme"
+}

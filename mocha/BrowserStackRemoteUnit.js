@@ -1,34 +1,41 @@
-var assert = require('assert'),
-fs = require('fs');
+var assert = require('assert');
 
-var webdriver = require('browserstack-webdriver')
-test = require('browserstack-webdriver/testing');
+const { Builder, By, Key, until } = require('selenium-webdriver');
+const http = require('http');
 
-test.describe('Google Search', function() {
-  var driver, server;
+const BROWSERSTACK_USERNAME = process.env.BROWSERSTACK_USERNAME || 'BROWSERSTACK_USERNAME';
+const BROWSERSTACK_ACCESS_KEY = process.env.BROWSERSTACK_ACCESS_KEY || 'BROWSERSTACK_ACCESS_KEY';
 
-  test.before(function() {
-    var capabilities = {
-      'browserName' : 'firefox', 
-      'browserstack.user' : 'USERNAME',
-      'browserstack.key' : 'ACCESS_KEY'
-    }
-    driver = new webdriver.Builder().
-      usingServer('http://hub.browserstack.com/wd/hub').
-      withCapabilities(capabilities).
-      build();
-  });
-  
-  test.it('should append query to title', function() {
-    driver.get('http://www.google.com');
-    driver.findElement(webdriver.By.name('q')).sendKeys('BrowserStack');
-    driver.findElement(webdriver.By.name('btnG')).click();
-    driver.wait(function() {
-      return driver.getTitle().then(function(title) {
-        return 'BrowserStack - Google Search' === title;
-      });
-    }, 1000);
+let HttpAgent = new http.Agent({
+  keepAlive: true,
+});
+
+describe('Google Search', function () {
+  let driver;
+
+  before(function () {
+    let capabilities = {
+      browserName: 'Firefox',
+      name: 'Firefox Test',
+      os: 'Windows'
+    };
+    driver = new Builder()
+      .usingHttpAgent(HttpAgent)
+      .withCapabilities(capabilities)
+      .usingServer(`http://${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}@hub-cloud.browserstack.com/wd/hub`)
+      .build();
   });
 
-  test.after(function() { driver.quit(); });
+  it('should append query to title', async function () {
+    this.timeout(15000);
+    await driver.get('http://www.google.com/ncr');
+    let searchElement = await driver.findElement(By.name('q'));
+    await searchElement.sendKeys('BrowserStack', Key.RETURN);
+    let title = await driver.getTitle();
+    assert.equal(title, 'BrowserStack - Google Search');
+  });
+
+  after(function () {
+    driver.quit();
+  });
 });
