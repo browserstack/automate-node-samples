@@ -9,22 +9,32 @@ let HttpAgent = new http.Agent({
 });
 
 let capabilities = {
-	browserName: 'Firefox',
-	name: 'Firefox Test',
-	os: 'Windows'
+	'browserName': 'Firefox',
+	'browserstack.use_w3c': true,
+	'bstack:options': {
+		'os': 'Windows',
+		'osVersion': '7',
+		'sessionName': 'Firefox Test',
+		'buildName': 'Test Build 01',
+		'projectName': 'My Awesome App',
+		'debug': true,
+	},
 };
 
-(async () => {
-	let driver = new Builder()
-		.usingHttpAgent(HttpAgent)
-		.withCapabilities(capabilities)
-		.usingServer(`http://${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}@hub-cloud.browserstack.com/wd/hub`)
-		.build();
-	try {
-		await driver.get('http://www.google.com/ncr');
-		await driver.findElement(By.name('q')).sendKeys('Browserstack', Key.RETURN);
-		console.log(await driver.getTitle());
-	} finally {
-		await driver.quit();
-	}
-})();
+let driver = new Builder()
+	.usingHttpAgent(HttpAgent)
+	.withCapabilities(capabilities)
+	.usingServer(`http://${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}@hub-cloud.browserstack.com/wd/hub`)
+	.build();
+
+driver.get('http://www.google.com/ncr').then(() => {
+	driver.findElement(By.name('q')).then((element) => {
+		element.sendKeys('BrowserStack', Key.RETURN).then(() => {
+			driver.wait(until.titleContains('BrowserStack')).then(() => driver.getTitle().then((title) => {
+				console.log(title);
+				driver.quit();
+			}));
+		})
+	});
+});
+
