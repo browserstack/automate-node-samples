@@ -9,7 +9,7 @@ To setup run `npm install`
 
 #### Samples
 1. `node BrowserStack.js` : Run google on browserstack.
-1. `npm test` : Run sample mocha test.
+1. `mocha mocha/BrowserStackRemoteUnit.js` : Run sample mocha test.
 
 ## Other frameworks
 

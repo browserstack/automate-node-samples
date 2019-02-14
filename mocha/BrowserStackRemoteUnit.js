@@ -17,7 +17,10 @@ describe('Google Search', function () {
     let capabilities = {
       browserName: 'Firefox',
       name: 'Firefox Test',
-      os: 'Windows'
+      os: 'Windows',
+      build: 'Test Build 01',
+      project: 'My Awesome App',
+      'browserstack.debug': true,
     };
     driver = new Builder()
       .usingHttpAgent(HttpAgent)
@@ -26,13 +29,18 @@ describe('Google Search', function () {
       .build();
   });
 
-  it('should append query to title', async function () {
-    this.timeout(15000);
-    await driver.get('http://www.google.com/ncr');
-    let searchElement = await driver.findElement(By.name('q'));
-    await searchElement.sendKeys('BrowserStack', Key.RETURN);
-    let title = await driver.getTitle();
-    assert.equal(title, 'BrowserStack - Google Search');
+  it('should append query to title', function (done) {
+    this.timeout(30000);
+    driver.get('http://www.google.com/ncr').then(() => {
+      driver.findElement(By.name('q')).then((element) => {
+        element.sendKeys('BrowserStack', Key.RETURN).then(() => {
+          driver.wait(until.stalenessOf(element)).then(() => driver.getTitle().then((title) => {
+            assert.equal(title, 'BrowserStack - Google Search');
+            done();
+          }));
+        });
+      });
+    });
   });
 
   after(function () {
