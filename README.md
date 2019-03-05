@@ -2,7 +2,7 @@
 
 This repository contains code samples from http://browserstack.com/automate/node. Please feel free to clone the repo and use the example code.
 
-Master branch contains **Selenium 3** samples, for **Selenium 4 - W3C protocol** please checkout [selenium-4](https://github.com/browserstack/automate-java-samples/tree/selenium-4) branch
+Master branch contains **Selenium 3** samples, for **Selenium 4 - W3C protocol** please checkout [selenium-4](https://github.com/browserstack/automate-node-samples/tree/selenium-4) branch
 
 Do remember to switch the BROWSERSTACK_USERNAME and BROWSERSTACK_ACCESS_KEY with your own browserstack credentials.
 
