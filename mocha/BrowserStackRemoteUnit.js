@@ -29,7 +29,7 @@ describe('Google Search', function () {
     driver = new Builder()
       .usingHttpAgent(HttpAgent)
       .withCapabilities(capabilities)
-      .usingServer(`http://${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}@hub-cloud.browserstack.com/wd/hub`)
+      .usingServer(`https://${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}@hub-cloud.browserstack.com/wd/hub`)
       .build();
   });
 
