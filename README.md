@@ -8,8 +8,9 @@ Do remember to switch the BROWSERSTACK_USERNAME and BROWSERSTACK_ACCESS_KEY with
 To setup run `npm install`
 
 #### Samples
-1. `node BrowserStack.js` : Run google on browserstack.
-1. `mocha mocha/BrowserStackRemoteUnit.js` : Run sample mocha test.
+1. `node single.js` : Run test on a single browser.
+2. `node parallel.js` : Run test on multiple browsers.
+3. `mocha mocha/BrowserStackRemoteUnit.js` : Run sample mocha test.
 
 ## Other frameworks
 
