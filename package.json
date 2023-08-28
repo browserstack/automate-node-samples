@@ -7,7 +7,7 @@
     "example": "example"
   },
   "dependencies": {
-    "mocha": "^7.1.1",
+    "mocha": "^10.2.0",
     "selenium-webdriver": "^4.0.0-alpha.1"
   },
   "devDependencies": {},
